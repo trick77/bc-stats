@@ -139,9 +139,10 @@ function displayMinedBlocksTable(obj) {
         t.cell('Distance', row.distance);
         let delta = row.distance - row.difficulty;
         if (delta >= 0) {
-            t.cell('Diffy-Dist Δ', delta);
+            const deltaTitle = 'Diffy-Dist Δ';
+            t.cell(deltaTitle, delta);
         } else {
-            t.cell('Diffy-Dist Δ', colors.red(delta + ' (invalid)'));
+            t.cell(deltaTitle, colors.red(delta + ' (invalid)'));
         }
         t.newRow();
         i++;
