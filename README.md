@@ -12,13 +12,28 @@ Run ```npm install``` first to install the required modules.
 
 ## Usage
 
-Usage example:
-
-```node bc-stats.js --hostname localhost --address 0x79d5dffb9ea3a4c30c1d479a519d14a8f6220746 --ranking```
-
-Output:
+Use the --help argument to get a list of all available options:
 
 ```
+$ node bc-stats.js --help
+
+  Usage: bc-stats -n localhost -a 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3
+
+  Options:
+
+    -V, --version                output the version number
+    -n, --hostname <hostname>    Hostname with a running bcnode
+    -a, --miner <miner>          Miner address
+    -m, --maxblocks [maxblocks]  Maximum number of blocks to query
+    -r, --ranking                Show miner ranking table (off by default)
+    -h, --help                   output usage information
+```    
+
+Usage example:
+
+```
+$ node bc-stats.js --hostname localhost --address 0x79d5dffb9ea3a4c30c1d479a519d14a8f6220746 --ranking
+
 Requesting a maximum of 1024 blocks
 Connected to localhost:3000
 
