@@ -64,7 +64,7 @@ client.on('blocks.set', (blocks) => {
     oldestTime.setUTCSeconds(blocks[0].timestamp);
     console.info('Latest block found: ' + blocks[0].height + '@' + oldestTime.toLocaleTimeString());
 
-    let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length;
+    let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
     console.info('Missing blocks: ' + missingBlocks);
   }
   let minedblocks = [];
