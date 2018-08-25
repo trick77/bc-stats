@@ -129,6 +129,7 @@ function displayStatsTable(obj) {
 function displayMinedBlocksTable(obj) {
     let i = 1;
     const t = new table();
+    const deltaTitle = 'Diffy-Dist Δ';
     Object.values(obj).forEach(row => {
         let time = new Date(0);
         time.setUTCSeconds(row.timestamp);
@@ -139,7 +140,6 @@ function displayMinedBlocksTable(obj) {
         t.cell('Distance', row.distance);
         let delta = row.distance - row.difficulty;
         if (delta >= 0) {
-            const deltaTitle = 'Diffy-Dist Δ';
             t.cell(deltaTitle, delta);
         } else {
             t.cell(deltaTitle, colors.red(delta + ' (invalid)'));
