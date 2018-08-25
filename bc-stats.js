@@ -97,9 +97,9 @@ function displayStatsTable(obj) {
     const t = new table();
     let i = 1;
     entries.forEach(row => {
-        t.cell('rank', i);
-        t.cell('miner', row[0]);
-        t.cell('count', row[1]);
+        t.cell('Rank', i);
+        t.cell('Miner', row[0]);
+        t.cell('Count', row[1]);
         t.newRow();
         i += 1;
     });
@@ -113,9 +113,9 @@ function displayMinedBlocksTable(obj) {
         let time = new Date(0);
         time.setUTCSeconds(row.timestamp);
         t.cell('#', i);
-        t.cell('height', row.height);
-        t.cell('time', time.toLocaleTimeString());
-        t.cell('distance', row.distance);
+        t.cell('Height', row.height);
+        t.cell('Time', time.toLocaleTimeString());
+        t.cell('Distance', row.distance);
         t.newRow();
         i += 1;
     });
