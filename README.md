@@ -68,3 +68,12 @@ Rank  Miner                                       Count
 10    0xec003b77af4813a26714f1733e8fe7dadd85bf4c  1
 ```
 
+## Tips & tricks
+
+To receive the statistics by e-mail (i.e. useful for cron jobs) you could use something like this:
+
+```
+node bc-stats.js -n localhost -a 0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c --no-color -m 10000 | mail -s "Block Collider miner stats" johndoe@domain.abc
+```
+
+Obviously, e-mail needs to be working on the local system.
