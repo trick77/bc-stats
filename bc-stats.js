@@ -54,11 +54,11 @@ client.on('blocks.set', (blocks) => {
     if (blocks.length > 0) {
         let latestTime = new Date(0);
         latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
-        console.info('Oldest block found: ' + blocks[blocks.length - 1].height + '@' + latestTime.toLocaleTimeString());
+        console.info('Oldest block found: ' + blocks[blocks.length - 1].height + ' @ ' + latestTime.toLocaleTimeString());
 
         let oldestTime = new Date(0);
         oldestTime.setUTCSeconds(blocks[0].timestamp);
-        console.info('Latest block found: ' + blocks[0].height + '@' + oldestTime.toLocaleTimeString());
+        console.info('Latest block found: ' + blocks[0].height + ' @ ' + oldestTime.toLocaleTimeString());
 
         let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
         console.info('Missing blocks: ' + missingBlocks);
