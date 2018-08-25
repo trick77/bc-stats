@@ -3,9 +3,11 @@
  * Run 'npm install' first.
  */
 
-const io = require("socket.io-client");
-const table = require("easy-table");
+const io = require('socket.io-client');
+const table = require('easy-table');
 const program = require('commander');
+const colors = require('colors');
+
 
 program
     .version('0.1.1')
@@ -28,7 +30,7 @@ if (program.ranking) {
   showRanking = true;
 }
 
-console.info('Requesting a maximum of ' + maxBlocks + ' blocks');
+console.info(colors.grey('Requesting a maximum of ' + maxBlocks + ' blocks'));
 
 const hostname = program.hostname;
 const miner = program.miner;
@@ -41,7 +43,7 @@ client = io.connect('ws://' + hostname + ':' + port, {
 
 client.on('connect', () => {
     clearTimeout(client._connectTimer);
-    console.info('Connected to ' + hostname + ':' + port + '\n');
+    console.info(colors.green('Connected to ' + hostname + ':' + port + '\n'));
     client.emit('blocks.get', {"id": "latest", "count": maxBlocks});
 });
 
@@ -52,27 +54,27 @@ client._connectTimer = setTimeout(function () {
 client.on('connect_error', (error) => {
     clearTimeout(client._connectTimer);
     client.close();
-    console.error('Unable to connect :-(');
+    console.error(colors.red('Unable to connect :-('));
 });
 
 client.on('blocks.set', (blocks) => {
     client.close();
-    console.info('Total blocks found: ' + blocks.length + ' (out of a requested ' + maxBlocks + ')');
+    console.info('Total blocks found: ' + colors.yellow(blocks.length) + colors.grey(' (out of a requested ' + maxBlocks + ')'));
     if (blocks.length > 0) {
         let oldestTime = new Date(0);
         oldestTime.setUTCSeconds(blocks[0].timestamp);
-        console.info('Latest block found: ' + blocks[0].height + ' @ ' + oldestTime.toLocaleTimeString());
+        console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(oldestTime.toLocaleTimeString()));
 
         let latestTime = new Date(0);
         latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
-        console.info('Oldest block found: ' + blocks[blocks.length - 1].height + ' @ ' + latestTime.toLocaleTimeString());
+        console.info('Oldest block found: ' + colors.yellow(blocks[blocks.length - 1].height) + ' @ ' + colors.yellow(latestTime.toLocaleTimeString()));
 
         if (oldestTime < latestTime) {
-            console.info('*** Possible timestamp attack going on!')
+            console.info(colors.red('*** Possible timestamp attack going on!'))
         }
 
         let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
-        console.info('Missing blocks: ' + missingBlocks);
+        console.info('Missing blocks: ' + colors.yellow(missingBlocks));
     }
     let minedBlocks = [];
     for (let i = 0; i < blocks.length; i++) {
@@ -83,7 +85,7 @@ client.on('blocks.set', (blocks) => {
 
     if (minedBlocks.length > 0) {
         console.info('\nMined blocks in found blocks:');
-        console.info('-----------------------------');
+        console.info(colors.grey('-----------------------------'));
         displayMinedBlocksTable(minedBlocks);
     }
     else {
@@ -92,7 +94,7 @@ client.on('blocks.set', (blocks) => {
 
     if (showRanking && blocks.length > 0) {
         console.info('Miner ranking for found blocks:');
-        console.info('-------------------------------------------------------');
+        console.info(colors.grey('-------------------------------'));
         const counts = Object.create(null);
         blocks.forEach(block => {
             counts[block.miner] = counts[block.miner] ? counts[block.miner] + 1 : 1;
@@ -108,9 +110,15 @@ function displayStatsTable(obj) {
     const t = new table();
     let i = 1;
     entries.forEach(row => {
-        t.cell('Rank', i);
-        t.cell('Miner', row[0]);
-        t.cell('Count', row[1]);
+        if (miner == row[0]) {
+            t.cell('Rank', colors.green(i));
+            t.cell('Miner', colors.green(row[0]));
+            t.cell('Count', colors.green(row[1]));
+        } else {
+            t.cell('Rank', i);
+            t.cell('Miner', row[0]);
+            t.cell('Count', row[1]);
+        }
         t.newRow();
         i++;
     });
@@ -132,7 +140,7 @@ function displayMinedBlocksTable(obj) {
         if (delta >= 0) {
             t.cell('Diff-Delta', delta);
         } else {
-            t.cell('Diff-Delta', delta + ' (invalid)');
+            t.cell('Diff-Delta', colors.red(delta + ' (invalid)'));
         }
         t.newRow();
         i++;
