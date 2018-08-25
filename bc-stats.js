@@ -119,7 +119,14 @@ function displayMinedBlocksTable(obj) {
         t.cell('#', i);
         t.cell('Height', row.height);
         t.cell('Time', time.toLocaleTimeString());
+        t.cell('Difficulty', row.difficulty);
         t.cell('Distance', row.distance);
+        let delta = row.distance - row.difficulty;
+        if (delta >= 0) {
+            t.cell('Diff-Delta', delta);
+        } else {
+            t.cell('Diff-Delta', delta + ' (invalid)');
+        }
         t.newRow();
         i++;
     });
