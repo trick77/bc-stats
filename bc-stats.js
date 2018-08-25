@@ -15,18 +15,6 @@ program
     .option('-m, --maxblocks [maxblocks]', 'Optional maximum number of blocks to query')
     .parse(process.argv);
 
-if (!program.hostname) {
-    console.error('Hostname missing');
-    program.outputHelp();
-    process.exit(1);
-}
-
-if (!program.miner) {
-    console.error('Miner address missing');
-    program.outputHelp();
-    process.exit(1);
-}
-
 let maxBlocks = 1024;
 if (program.maxblocks) {
     if (program.maxblocks > 0) {
