@@ -16,6 +16,7 @@ program
     .option('-a, --miner <miner>', 'Miner address')
     .option('-m, --maxblocks [maxblocks]', 'Maximum number of blocks to query')
     .option('-r, --ranking', 'Show miner ranking table (off by default)')
+    .option('-c, --no-color', 'Disable colors in output (on by default)')
     .parse(process.argv);
 
 let maxBlocks = 1024;
