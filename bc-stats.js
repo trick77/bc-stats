@@ -8,10 +8,11 @@ const table = require("easy-table");
 const program = require('commander');
 
 program
-    .version('0.1.0')
-    .usage('-h 149.28.158.92 -m 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
+    .version('0.1.1')
+    .usage('-n 149.28.158.92 -a 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
     .option('-n, --hostname <hostname>', 'Hostname with a running bcnode')
     .option('-a, --miner <miner>', 'Miner address')
+    .option('-m, --maxblocks [maxblocks]', 'Optional maximum number of blocks to query')
     .parse(process.argv);
 
 if (!program.hostname) {
@@ -26,10 +27,15 @@ if (!program.miner) {
     process.exit(1);
 }
 
+let maxBlocks = 1024;
+if (program.maxblocks) {
+    maxBlocks = program.maxblocks;
+}
+console.info('Querying a maximum of ' + maxBlocks + ' blocks');
+
 const hostname = program.hostname;
 const miner = program.miner;
 const port = 3000;
-const maxBlocks = 4096;
 
 client = io.connect('ws://' + hostname + ':' + port, {
     path: '/ws',
@@ -67,17 +73,17 @@ client.on('blocks.set', (blocks) => {
         let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
         console.info('Missing blocks: ' + missingBlocks);
     }
-    let minedblocks = [];
+    let minedBlocks = [];
     for (let i = 0; i < blocks.length; i++) {
         if (blocks[i].miner == miner) {
-            minedblocks.push(blocks[i]);
+            minedBlocks.push(blocks[i]);
         }
     }
 
-    if (minedblocks.length > 0) {
+    if (minedBlocks.length > 0) {
         console.info('\nMined blocks in found blocks:');
         console.info('-------------------------------------');
-        printMinedBlocksTable(minedblocks);
+        displayMinedBlocksTable(minedBlocks);
     }
     else {
         console.info('No mined blocks for miner ' + miner + '\n');
@@ -90,12 +96,12 @@ client.on('blocks.set', (blocks) => {
         blocks.forEach(block => {
             counts[block.miner] = counts[block.miner] ? counts[block.miner] + 1 : 1;
         });
-        printStatsTable(counts);
+        displayStatsTable(counts);
     }
 
 });
 
-function printStatsTable(obj) {
+function displayStatsTable(obj) {
     const entries = Object.entries(obj);
     entries.sort((a, b) => b[1] - a[1]);
     const t = new table();
@@ -110,7 +116,7 @@ function printStatsTable(obj) {
     console.info(t.toString());
 }
 
-function printMinedBlocksTable(obj) {
+function displayMinedBlocksTable(obj) {
     let i = 1;
     const t = new table();
     Object.values(obj).forEach(row => {
