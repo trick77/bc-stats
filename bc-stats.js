@@ -141,7 +141,7 @@ function displayMinedBlocksTable(obj) {
         if (delta >= 0) {
             t.cell('Diffy-Dist Δ', delta);
         } else {
-            t.cell('Diffi-Dist Δ', colors.red(delta + ' (invalid)'));
+            t.cell('Diffy-Dist Δ', colors.red(delta + ' (invalid)'));
         }
         t.newRow();
         i++;
