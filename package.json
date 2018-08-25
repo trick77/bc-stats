@@ -3,17 +3,23 @@
   "version": "0.1.0",
   "description": "Fetches data from a Block Collider node and displays some statistics.",
   "main": "bc-stats.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "bcnode"
-  ],
-  "author": "trick77",
-  "license": "ISC",
   "dependencies": {
     "commander": "^2.17.1",
     "easy-table": "^1.1.1",
     "socket.io-client": "^2.1.1"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trick77/bc-stats.git"
+  },
+  "author": "trick77",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trick77/bc-stats/issues"
+  },
+  "homepage": "https://github.com/trick77/bc-stats#readme"
 }
