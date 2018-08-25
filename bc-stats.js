@@ -83,7 +83,7 @@ client.on('blocks.set', (blocks) => {
 
     if (minedBlocks.length > 0) {
         console.info('\nMined blocks in found blocks:');
-        console.info('-------------------------------------');
+        console.info('-----------------------------');
         displayMinedBlocksTable(minedBlocks);
     }
     else {
