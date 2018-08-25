@@ -23,11 +23,12 @@ Requesting a maximum of 1024 blocks
 Connected to localhost:3000
 
 Total blocks found: 23 (out of a requested 1024)
+Unique miner addresses: 10
 Latest block found: 249970 @ 20:39:05
 Oldest block found: 249946 @ 20:36:50
 Missing blocks: 2
 
-Mined blocks in found blocks:
+Mined blocks (3) in found blocks (23):
 -----------------------------
 #  Height  Time      Difficulty       Distance         Diffy-Dist Δ
 -  ------  --------  ---------------  ---------------  -----------------------
