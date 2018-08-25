@@ -62,15 +62,13 @@ client.on('blocks.set', (blocks) => {
     client.close();
     console.info('Total blocks found: ' + colors.yellow(blocks.length) + ' (out of a requested ' + maxBlocks + ')');
     if (blocks.length > 0) {
-        let oldestTime = new Date(0);
-        oldestTime.setUTCSeconds(blocks[0].timestamp);
-        console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(oldestTime.toLocaleTimeString()));
+        console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(toLocalTime(blocks[0].timestamp)));
 
         let latestTime = new Date(0);
         latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
-        console.info('Oldest block found: ' + colors.yellow(blocks[blocks.length - 1].height) + ' @ ' + colors.yellow(latestTime.toLocaleTimeString()));
+        console.info('Oldest block found: ' + colors.yellow(blocks[blocks.length - 1].height) + ' @ ' + colors.yellow(toLocalTime(blocks[blocks.length - 1].timestamp)));
 
-        if (oldestTime < latestTime) {
+        if (new Date(blocks[0].timestamp) < new Date(blocks[blocks.length - 1].timestamp)) {
             console.info(colors.red('*** Possible timestamp attack going on!'))
         }
 
@@ -131,11 +129,9 @@ function displayMinedBlocksTable(obj) {
     const t = new table();
     const deltaTitle = 'Diffy-Dist Δ';
     Object.values(obj).forEach(row => {
-        let time = new Date(0);
-        time.setUTCSeconds(row.timestamp);
         t.cell('#', i);
         t.cell('Height', row.height);
-        t.cell('Time', time.toLocaleTimeString());
+        t.cell('Time', toLocalTime(row.timestamp));
         t.cell('Difficulty', row.difficulty);
         t.cell('Distance', row.distance);
         let delta = row.distance - row.difficulty;
@@ -148,4 +144,10 @@ function displayMinedBlocksTable(obj) {
         i++;
     });
     console.info(t.toString());
+}
+
+function toLocalTime(timestamp) {
+    let time = new Date(0);
+    time.setUTCSeconds(timestamp);
+    return time.toLocaleTimeString();
 }
