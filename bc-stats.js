@@ -61,11 +61,14 @@ client.on('connect_error', (error) => {
 client.on('blocks.set', (blocks) => {
     client.close();
     console.info('Total blocks found: ' + colors.yellow(blocks.length) + ' (out of a requested ' + maxBlocks + ')');
+    const counts = Object.create(null);
     if (blocks.length > 0) {
-        console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(toLocalTime(blocks[0].timestamp)));
+        blocks.forEach(block => {
+            counts[block.miner] = counts[block.miner] ? counts[block.miner] + 1 : 1;
+        });
+        console.info('Unique miner addresses: ' + colors.yellow(Object.keys(counts).length));
 
-        let latestTime = new Date(0);
-        latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
+        console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(toLocalTime(blocks[0].timestamp)));
         console.info('Oldest block found: ' + colors.yellow(blocks[blocks.length - 1].height) + ' @ ' + colors.yellow(toLocalTime(blocks[blocks.length - 1].timestamp)));
 
         if (new Date(blocks[0].timestamp) < new Date(blocks[blocks.length - 1].timestamp)) {
@@ -74,6 +77,7 @@ client.on('blocks.set', (blocks) => {
 
         let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
         console.info('Missing blocks: ' + colors.yellow(missingBlocks));
+
     }
     let minedBlocks = [];
     for (let i = 0; i < blocks.length; i++) {
@@ -84,7 +88,7 @@ client.on('blocks.set', (blocks) => {
 
     if (minedBlocks.length > 0) {
         console.info('\nMined blocks (' + colors.yellow(minedBlocks.length) + ') in found blocks (' + colors.yellow(blocks.length) + '):');
-        console.info(colors.grey('--------------------------------------'));
+        console.info(colors.grey('---------------------------------------'));
         displayMinedBlocksTable(minedBlocks);
     }
     else {
@@ -94,10 +98,6 @@ client.on('blocks.set', (blocks) => {
     if (showRanking && blocks.length > 0) {
         console.info('Miner ranking for found blocks:');
         console.info(colors.grey('-------------------------------'));
-        const counts = Object.create(null);
-        blocks.forEach(block => {
-            counts[block.miner] = counts[block.miner] ? counts[block.miner] + 1 : 1;
-        });
         displayStatsTable(counts);
     }
 
