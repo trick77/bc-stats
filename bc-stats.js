@@ -38,7 +38,8 @@ const port = 3000;
 
 client = io.connect('ws://' + hostname + ':' + port, {
     path: '/ws',
-    transports: ['websocket']
+    transports: ['websocket'],
+    timeout: 60000
 });
 
 client.on('connect', () => {
@@ -138,9 +139,9 @@ function displayMinedBlocksTable(obj) {
         t.cell('Distance', row.distance);
         let delta = row.distance - row.difficulty;
         if (delta >= 0) {
-            t.cell('Diff-Delta', delta);
+            t.cell('Diffy-Dist Δ', delta);
         } else {
-            t.cell('Diff-Delta', colors.red(delta + ' (invalid)'));
+            t.cell('Diffi-Dist Δ', colors.red(delta + ' (invalid)'));
         }
         t.newRow();
         i++;
