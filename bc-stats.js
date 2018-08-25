@@ -11,7 +11,7 @@ const colors = require('colors');
 
 program
     .version('0.1.1')
-    .usage('-n 149.28.158.92 -a 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
+    .usage('-n localhost -a 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
     .option('-n, --hostname <hostname>', 'Hostname with a running bcnode')
     .option('-a, --miner <miner>', 'Miner address')
     .option('-m, --maxblocks [maxblocks]', 'Maximum number of blocks to query')
@@ -27,7 +27,7 @@ if (program.maxblocks) {
 
 let showRanking = false;
 if (program.ranking) {
-  showRanking = true;
+    showRanking = true;
 }
 
 console.info('Requesting a maximum of ' + maxBlocks + ' blocks');
