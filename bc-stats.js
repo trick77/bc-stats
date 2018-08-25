@@ -67,7 +67,6 @@ client.on('blocks.set', (blocks) => {
             counts[block.miner] = counts[block.miner] ? counts[block.miner] + 1 : 1;
         });
         console.info('Unique miner addresses: ' + colors.yellow(Object.keys(counts).length));
-
         console.info('Latest block found: ' + colors.yellow(blocks[0].height) + ' @ ' + colors.yellow(toLocalTime(blocks[0].timestamp)));
         console.info('Oldest block found: ' + colors.yellow(blocks[blocks.length - 1].height) + ' @ ' + colors.yellow(toLocalTime(blocks[blocks.length - 1].timestamp)));
 
