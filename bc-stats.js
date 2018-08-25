@@ -87,7 +87,7 @@ client.on('blocks.set', (blocks) => {
 
     if (minedBlocks.length > 0) {
         console.info('\nMined blocks (' + colors.yellow(minedBlocks.length) + ') in found blocks (' + colors.yellow(blocks.length) + '):');
-        console.info(colors.grey('---------------------------------------'));
+        console.info(colors.grey('--------------------------------------------'));
         displayMinedBlocksTable(minedBlocks);
     }
     else {
@@ -96,7 +96,7 @@ client.on('blocks.set', (blocks) => {
 
     if (showRanking && blocks.length > 0) {
         console.info('Miner ranking for found blocks:');
-        console.info(colors.grey('-------------------------------'));
+        console.info(colors.grey('------------------------------------'));
         displayStatsTable(counts);
     }
 
