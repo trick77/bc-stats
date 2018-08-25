@@ -83,8 +83,8 @@ client.on('blocks.set', (blocks) => {
     }
 
     if (minedBlocks.length > 0) {
-        console.info('\nMined blocks in found blocks:');
-        console.info(colors.grey('-----------------------------'));
+        console.info('\nMined blocks (' + colors.yellow(minedBlocks.length) + ') in found blocks (' + colors.yellow(blocks.length) + '):');
+        console.info(colors.grey('--------------------------------------'));
         displayMinedBlocksTable(minedBlocks);
     }
     else {
