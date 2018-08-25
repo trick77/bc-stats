@@ -10,7 +10,7 @@ const program = require('commander');
 program
   .version('0.1.0')
   .usage('-h 149.28.158.92 -m 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
-  .option('-h, --hostname [hostname]', 'Hostname with a running bcnode')
+  .option('-n, --hostname [hostname]', 'Hostname with a running bcnode')
   .option('-m, --miner [miner]', 'Miner address')
   .parse(process.argv);
 
