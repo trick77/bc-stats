@@ -29,7 +29,9 @@ if (!program.miner) {
 
 let maxBlocks = 1024;
 if (program.maxblocks) {
-    maxBlocks = program.maxblocks;
+    if (program.maxblocks > 0) {
+        maxBlocks = program.maxblocks;
+    }
 }
 console.info('Querying a maximum of ' + maxBlocks + ' blocks');
 
