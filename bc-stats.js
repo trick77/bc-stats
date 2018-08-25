@@ -12,7 +12,8 @@ program
     .usage('-n 149.28.158.92 -a 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3')
     .option('-n, --hostname <hostname>', 'Hostname with a running bcnode')
     .option('-a, --miner <miner>', 'Miner address')
-    .option('-m, --maxblocks [maxblocks]', 'Optional maximum number of blocks to query')
+    .option('-m, --maxblocks [maxblocks]', 'Maximum number of blocks to query')
+    .option('-r, --ranking', 'Show miner ranking table (off by default)')
     .parse(process.argv);
 
 let maxBlocks = 1024;
@@ -21,6 +22,12 @@ if (program.maxblocks) {
         maxBlocks = program.maxblocks;
     }
 }
+
+let showRanking = false;
+if (program.ranking) {
+  showRanking = true;
+}
+
 console.info('Requesting a maximum of ' + maxBlocks + ' blocks');
 
 const hostname = program.hostname;
@@ -83,7 +90,7 @@ client.on('blocks.set', (blocks) => {
         console.info('No mined blocks for miner ' + miner + '\n');
     }
 
-    if (blocks.length > 0) {
+    if (showRanking && blocks.length > 0) {
         console.info('Miner ranking for found blocks:');
         console.info('-------------------------------------------------------');
         const counts = Object.create(null);
