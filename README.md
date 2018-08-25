@@ -14,8 +14,40 @@ Run ```npm install``` first to install the required modules.
 
 Usage example:
 
-```node bc-stats.js --hostname 149.28.158.92 --address 0xf296ae51b4cb7c6028edf2fb99d5f754167f01e3 --ranking```
+```node bc-stats.js --hostname localhost --address 0x79d5dffb9ea3a4c30c1d479a519d14a8f6220746 --ranking```
 
+Output:
 
+```
+Requesting a maximum of 1024 blocks
+Connected to localhost:3000
 
+Total blocks found: 23 (out of a requested 1024)
+Latest block found: 249970 @ 20:39:05
+Oldest block found: 249946 @ 20:36:50
+Missing blocks: 2
+
+Mined blocks in found blocks:
+-----------------------------
+#  Height  Time      Difficulty       Distance         Diffy-Dist Δ
+-  ------  --------  ---------------  ---------------  -----------------------
+1  249969  20:39:03  296138548244184  299557023913895  3418475669711
+2  249964  20:38:42  300329760312934  308839000403271  8509240090337
+3  249947  20:36:58  304599290577826  304286229677335  -313060900491 (invalid)
+
+Miner ranking for found blocks:
+-------------------------------
+Rank  Miner                                       Count
+----  ------------------------------------------  -----
+1     0x40cf776fbd9e3336f48c2f6cc32cec888e2e2a74  4
+2     0x79d5dffb9ea3a4c30c1d479a519d14a8f6220746  3
+3     0xf61e847f4622e57e81352c58d43a252e13b62141  2
+4     0x76336ca889df2ad3724f97bbca6c472a9de0bbb6  2
+5     0xa267754e593004930b1f3b0031b953ad2b1cc3ce  2
+6     0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c  2
+7     0x1caaa1b480d73a7975e245590e91c217d5824360  2
+8     0x40cf776fbd9e3336f48c2f6cc32cec888e2e2a74  2
+9     0x8f14af5b2ee9ff1f4179db89a73d706238d98e3f  1
+10    0xec003b77af4813a26714f1733e8fe7dadd85bf4c  1
+```
 
