@@ -60,7 +60,7 @@ client.on('blocks.set', (blocks) => {
         latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
         console.info('Oldest block found: ' + blocks[blocks.length - 1].height + ' @ ' + latestTime.toLocaleTimeString());
 
-        if (oldestTime > latestTime) {
+        if (oldestTime < latestTime) {
             console.info('*** Possible timestamp attack going on!')
         }
 
