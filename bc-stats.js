@@ -50,15 +50,15 @@ client.on('connect_error', (error) => {
 
 client.on('blocks.set', (blocks) => {
     client.close();
-    console.info('Total blocks found: ' + blocks.length);
+    console.info('Total blocks found: ' + blocks.length + ' (out of ' + maxBlocks + ')');
     if (blocks.length > 0) {
-        let latestTime = new Date(0);
-        latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
-        console.info('Oldest block found: ' + blocks[blocks.length - 1].height + ' @ ' + latestTime.toLocaleTimeString());
-
         let oldestTime = new Date(0);
         oldestTime.setUTCSeconds(blocks[0].timestamp);
         console.info('Latest block found: ' + blocks[0].height + ' @ ' + oldestTime.toLocaleTimeString());
+
+        let latestTime = new Date(0);
+        latestTime.setUTCSeconds(blocks[blocks.length - 1].timestamp);
+        console.info('Oldest block found: ' + blocks[blocks.length - 1].height + ' @ ' + latestTime.toLocaleTimeString());
 
         let missingBlocks = blocks[0].height - blocks[blocks.length - 1].height - blocks.length + 1;
         console.info('Missing blocks: ' + missingBlocks);
@@ -101,7 +101,7 @@ function displayStatsTable(obj) {
         t.cell('Miner', row[0]);
         t.cell('Count', row[1]);
         t.newRow();
-        i += 1;
+        i++;
     });
     console.info(t.toString());
 }
@@ -117,7 +117,7 @@ function displayMinedBlocksTable(obj) {
         t.cell('Time', time.toLocaleTimeString());
         t.cell('Distance', row.distance);
         t.newRow();
-        i += 1;
+        i++;
     });
     console.info(t.toString());
 }
