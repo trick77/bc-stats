@@ -21,7 +21,7 @@ if (program.maxblocks) {
         maxBlocks = program.maxblocks;
     }
 }
-console.info('Querying a maximum of ' + maxBlocks + ' blocks');
+console.info('Requesting a maximum of ' + maxBlocks + ' blocks');
 
 const hostname = program.hostname;
 const miner = program.miner;
@@ -50,7 +50,7 @@ client.on('connect_error', (error) => {
 
 client.on('blocks.set', (blocks) => {
     client.close();
-    console.info('Total blocks found: ' + blocks.length + ' (out of ' + maxBlocks + ')');
+    console.info('Total blocks found: ' + blocks.length + ' (out of a requested ' + maxBlocks + ')');
     if (blocks.length > 0) {
         let oldestTime = new Date(0);
         oldestTime.setUTCSeconds(blocks[0].timestamp);
