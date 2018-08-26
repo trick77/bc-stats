@@ -26,6 +26,7 @@ $ node bc-stats.js --help
     -a, --miner <miner>          Miner address
     -m, --maxblocks [maxblocks]  Maximum number of blocks to query
     -r, --ranking                Show miner ranking table (off by default)
+    -b, --blocks                 Dump all blocks found (off by default)
     --no-color                   Disable colors in output (on by default)
     -h, --help                   output usage information
 ```    

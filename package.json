@@ -1,6 +1,6 @@
 {
   "name": "bc-stats",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fetches data from a Block Collider node and displays some statistics.",
   "main": "bc-stats.js",
   "dependencies": {
