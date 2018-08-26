@@ -71,6 +71,14 @@ Rank  Miner                                       Count
 
 ## Tips & tricks
 
+The miner address passed on the command line will be automatically highlighted in the output. If you
+want to highlight a different miner address as well, just use ack (```apt-get install -y ack```).
+
+```
+node bc-stats.js -n localhost -a 0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c | ack --passthru 0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c
+```
+ 
+
 To receive the statistics by e-mail (i.e. useful for cron jobs) you could use something like this:
 
 ```
