@@ -79,10 +79,10 @@ node bc-stats.js -n localhost -a 0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c -r -
 ```
  
 
-To receive the statistics by e-mail (i.e. useful for cron jobs) you could use something like this:
+To receive the statistics by -mail (i.e. useful for cron jobs) you could use something like this:
 
 ```
 node bc-stats.js -n localhost -a 0x1c2fd61edaeda21ff04bd0b470fab973ebf5f90c --no-color -m 10000 | mail -s "Block Collider miner stats" johndoe@domain.abc
 ```
 
-Obviously, e-mail needs to be working on the local system.
+Obviously, outbound email needs to be working on the local system.
